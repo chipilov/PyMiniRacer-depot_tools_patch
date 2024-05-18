@@ -186,26 +186,33 @@ repository.
 
 To release:
 
-1. Merge all changes into `main` on the offical repository.
-
-1. Update `HISTORY.md` with a summary of changes since the last release.
+1. Merge all changes into `main` on the official repository.
 
 1. Pick the next revision number:
 
     ```sh
-    $ git fetch --tags
-    $ git tag -l
-    # observe the next available tag
+    $ git fetch
+    $ git ls-remote origin | grep refs/heads/release
+    # observe the next available release version
     ```
 
-1. Update `src/py_mini_racer/__about__.py` with the new revision number.
+1. Create a `feature/...` branch, and:
 
-1. Add and push a tag:
+    1. Update `HISTORY.md` with a summary of changes since the last release.
+
+    1. Update `src/py_mini_racer/__about__.py` with the new revision number.
+
+    1. Create and merge a pull request for this branch into `main`.
+
+1. Create a `release/...` branch:
 
     ```sh
-    NEXT_TAG=the next tag
-    $ git tag "${NEXT_TAG}"
-    $ git push origin "${NEXT_TAG}"
+    $ git checkout main
+    $ git pull
+    $ git checkout -b release/
+    NEXT_RELEASE=the next tag, starting with the letter v. E.g., "v0.12.1".
+    $ git checkout -b "release/${NEXT_RELEASE}"
+    $ git push --set-upstream origin "release/${NEXT_RELEASE}"
     ```
 
 1. Observe the build process on GitHub Actions. It should build and push docs and upload
