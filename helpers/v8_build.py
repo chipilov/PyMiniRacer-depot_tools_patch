@@ -176,6 +176,12 @@ def ensure_depot_tools():
         "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
         cwd=get_workspace_path(),
     )
+    run(
+        "git",
+        "checkout",
+        "ab2fe54f4dc4dd19c2bb45e40fda557ca24d39ba",
+        cwd=get_workspace_path(),
+    )
 
     # depot_tools will auto-update when we run various commands. This creates extra
     # dependencies, e.g., on goma (which has trouble running on Alpine due to musl).
