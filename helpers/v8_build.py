@@ -180,7 +180,7 @@ def ensure_depot_tools():
         "git",
         "checkout",
         "ab2fe54f4dc4dd19c2bb45e40fda557ca24d39ba",
-        cwd=get_workspace_path(),
+        cwd=pathjoin(get_workspace_path(), "depot_tools"),
     )
 
     # depot_tools will auto-update when we run various commands. This creates extra
